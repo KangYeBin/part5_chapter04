@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">part3_chapter06</string>
+    <string name="my_page">나의 정보</string>
+    <string name="chat">채팅</string>
+    <string name="home">홈</string>
+    <string name="title">글 제목</string>
+    <string name="price">가격</string>
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="sign_up">회원가입</string>
+    <string name="sign_in_out">로그인</string>
+    <string name="send">전송</string>
+    <string name="new_message">메시지를 입력하세요</string>
+</resources>
