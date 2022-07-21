@@ -21,9 +21,11 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.yb.part5_chapter04.DBKey.Companion.DB_ARTICLES
 import com.yb.part5_chapter04.R
+import com.yb.part5_chapter04.databinding.ActivityAddArticleBinding
 
 class AddArticleActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityAddArticleBinding
     private var selectedUri: Uri? = null
     private lateinit var startActivityForResultLauncher: ActivityResultLauncher<Intent>
 
@@ -39,9 +41,10 @@ class AddArticleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_article)
+        binding = ActivityAddArticleBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        findViewById<Button>(R.id.imageAddButton).setOnClickListener {
+        binding.imageAddButton.setOnClickListener {
             when {
                 //이미 권한이 부여되었는지 확인
                 ContextCompat.checkSelfPermission(this,
@@ -67,7 +70,7 @@ class AddArticleActivity : AppCompatActivity() {
                     val getIntent = it?.data
                     if (getIntent != null) {
                         selectedUri = getIntent.data
-                        findViewById<ImageView>(R.id.photoImageView).setImageURI(selectedUri)
+                        binding.photoImageView.setImageURI(selectedUri)
                     } else {
                         Toast.makeText(this, "사진을 가져오지 못했습니다", Toast.LENGTH_SHORT).show()
                     }
@@ -76,9 +79,9 @@ class AddArticleActivity : AppCompatActivity() {
                 }
             }
 
-        findViewById<Button>(R.id.submitButton).setOnClickListener {
-            val title = findViewById<EditText>(R.id.titleEditText).text.toString()
-            val price = findViewById<EditText>(R.id.priceEditText).text.toString()
+        binding.submitButton.setOnClickListener {
+            val title = binding.titleEditText.text.toString()
+            val content = binding.contentEditText.text.toString()
             val sellerId = auth.currentUser?.uid.orEmpty()
 
             showProgressBar()
@@ -88,7 +91,7 @@ class AddArticleActivity : AppCompatActivity() {
                 val photoUri = selectedUri ?: return@setOnClickListener
                 uploadPhoto(photoUri,
                     successHandler = {
-                        uploadArticle(sellerId, title, price, it)
+                        uploadArticle(sellerId, title, content, it)
                     },
                     errorHandler = {
                         hideProgressBar()
@@ -97,7 +100,7 @@ class AddArticleActivity : AppCompatActivity() {
                     })
             } else {
                 //동기 방식
-                uploadArticle(sellerId, title, price, "")
+                uploadArticle(sellerId, title, content, "")
             }
         }
     }
@@ -122,8 +125,8 @@ class AddArticleActivity : AppCompatActivity() {
 
     }
 
-    private fun uploadArticle(sellerId: String, title: String, price: String, imageUrl: String) {
-        val model = ArticleModel(sellerId, title, System.currentTimeMillis(), "$price 원", imageUrl)
+    private fun uploadArticle(sellerId: String, title: String, content: String, imageUrl: String) {
+        val model = ArticleModel(sellerId, title, System.currentTimeMillis(), content, imageUrl)
         articleDB.push().setValue(model)
 
         hideProgressBar()
@@ -167,10 +170,10 @@ class AddArticleActivity : AppCompatActivity() {
     }
 
     private fun showProgressBar() {
-        findViewById<ProgressBar>(R.id.progressBar).visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     private fun hideProgressBar() {
-        findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
+        binding.progressBar.visibility = View.GONE
     }
 }

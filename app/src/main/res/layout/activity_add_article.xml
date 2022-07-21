@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="아이템 등록"
+            android:text="@string/add_feed"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -37,18 +37,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="@string/title"
+        android:hint="@string/feed_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarUnderLineView" />
 
     <EditText
-        android:id="@+id/priceEditText"
+        android:id="@+id/contentEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="@string/price"
-        android:inputType="numberDecimal"
+        android:hint="@string/feed_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleEditText" />

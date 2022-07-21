@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
-            android:text="중고거래"
+            android:text="@string/feed_list"
             android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
