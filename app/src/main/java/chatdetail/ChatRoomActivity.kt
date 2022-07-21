@@ -14,9 +14,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.yb.part3_chapter06.DBKey.Companion.DB_CHATS
-import com.yb.part3_chapter06.R
-import com.yb.part3_chapter06.databinding.ActivityChatRoomBinding
+import com.yb.part5_chapter04.DBKey.Companion.DB_CHATS
+import com.yb.part5_chapter04.R
 
 class ChatRoomActivity : AppCompatActivity() {
 

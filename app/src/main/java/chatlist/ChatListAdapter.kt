@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.yb.part3_chapter06.databinding.ItemChatListBinding
+import com.yb.part5_chapter04.databinding.ItemChatListBinding
 
 class ChatListAdapter(val onItemClicked: (ChatListModel) -> Unit) :
     ListAdapter<ChatListModel, ChatListAdapter.ViewHolder>(diffUtil) {

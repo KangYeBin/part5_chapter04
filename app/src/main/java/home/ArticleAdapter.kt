@@ -1,14 +1,12 @@
 package home
 
-import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.yb.part3_chapter06.databinding.ItemArticleBinding
+import com.yb.part5_chapter04.databinding.ItemArticleBinding
 import java.text.SimpleDateFormat
 import java.util.*
 

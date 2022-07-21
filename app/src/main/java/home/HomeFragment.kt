@@ -12,11 +12,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.yb.part3_chapter06.DBKey.Companion.CHILD_CHAT
-import com.yb.part3_chapter06.DBKey.Companion.DB_ARTICLES
-import com.yb.part3_chapter06.DBKey.Companion.DB_USERS
-import com.yb.part3_chapter06.R
-import com.yb.part3_chapter06.databinding.FragmentHomeBinding
+import com.yb.part5_chapter04.DBKey.Companion.CHILD_CHAT
+import com.yb.part5_chapter04.DBKey.Companion.DB_ARTICLES
+import com.yb.part5_chapter04.DBKey.Companion.DB_USERS
+import com.yb.part5_chapter04.R
+import com.yb.part5_chapter04.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 

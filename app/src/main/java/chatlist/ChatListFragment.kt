@@ -14,10 +14,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.yb.part3_chapter06.DBKey.Companion.CHILD_CHAT
-import com.yb.part3_chapter06.DBKey.Companion.DB_USERS
-import com.yb.part3_chapter06.R
-import com.yb.part3_chapter06.databinding.FragmentChatListBinding
+import com.yb.part5_chapter04.DBKey.Companion.CHILD_CHAT
+import com.yb.part5_chapter04.DBKey.Companion.DB_USERS
+import com.yb.part5_chapter04.R
+import com.yb.part5_chapter04.databinding.FragmentChatListBinding
 
 class ChatListFragment : Fragment(R.layout.fragment_chat_list) {
 

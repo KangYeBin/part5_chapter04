@@ -1,4 +1,4 @@
-package com.yb.part3_chapter06
+package com.yb.part5_chapter04
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

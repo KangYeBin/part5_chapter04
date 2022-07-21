@@ -15,13 +15,12 @@ import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import com.yb.part3_chapter06.DBKey.Companion.DB_ARTICLES
-import com.yb.part3_chapter06.R
+import com.yb.part5_chapter04.DBKey.Companion.DB_ARTICLES
+import com.yb.part5_chapter04.R
 
 class AddArticleActivity : AppCompatActivity() {
 

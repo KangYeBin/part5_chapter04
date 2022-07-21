@@ -3,12 +3,11 @@ package mypage
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.yb.part3_chapter06.R
-import com.yb.part3_chapter06.databinding.FragmentMypageBinding
+import com.yb.part5_chapter04.R
+import com.yb.part5_chapter04.databinding.FragmentMypageBinding
 
 class MyPageFragment : Fragment(R.layout.fragment_mypage) {
 

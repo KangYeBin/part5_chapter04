@@ -8,7 +8,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.yb.part3_chapter06"
+        applicationId "com.yb.part5_chapter04"
         minSdk 23
         targetSdk 31
         versionCode 1
