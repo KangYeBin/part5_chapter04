@@ -20,7 +20,7 @@ class ArticleAdapter(val onItemClicked: (ArticleModel) -> Unit) :
 
             binding.titleTextView.text = articleModel.title
             binding.createdAtTextView.text = format.format(date).toString()
-            binding.priceTextView.text = articleModel.content
+            binding.contentTextView.text = articleModel.content
 
             if (articleModel.imageUrl.isNotEmpty()) {
                 Glide.with(binding.thumbnailImageView)
