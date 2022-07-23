@@ -1,4 +1,4 @@
-package chatlist
+package com.yb.part5_chapter04.chatlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

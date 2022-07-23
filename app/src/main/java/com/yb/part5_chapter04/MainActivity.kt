@@ -3,10 +3,10 @@ package com.yb.part5_chapter04
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import chatlist.ChatListFragment
+import com.yb.part5_chapter04.chatlist.ChatListFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import home.HomeFragment
-import mypage.MyPageFragment
+import com.yb.part5_chapter04.home.HomeFragment
+import com.yb.part5_chapter04.mypage.MyPageFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,11 +1,11 @@
-package home
+package com.yb.part5_chapter04.home
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import chatlist.ChatListModel
+import com.yb.part5_chapter04.chatlist.ChatListModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

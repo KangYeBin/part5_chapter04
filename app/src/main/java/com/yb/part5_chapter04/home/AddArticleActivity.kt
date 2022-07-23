@@ -1,5 +1,6 @@
-package home
+package com.yb.part5_chapter04.home
 
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -20,10 +21,19 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.yb.part5_chapter04.DBKey.Companion.DB_ARTICLES
-import com.yb.part5_chapter04.R
 import com.yb.part5_chapter04.databinding.ActivityAddArticleBinding
+import com.yb.part5_chapter04.photo.CameraActivity
 
 class AddArticleActivity : AppCompatActivity() {
+
+    companion object {
+        const val PERMISSION_REQUEST_CODE = 1000
+        const val GALLERY_REQUEST_CODE = 1001
+        const val CAMERA_REQUEST_CODE = 1002
+
+        const val URI_LIST_KEY = "uriList"
+
+    }
 
     private lateinit var binding: ActivityAddArticleBinding
     private var selectedUri: Uri? = null
@@ -44,44 +54,18 @@ class AddArticleActivity : AppCompatActivity() {
         binding = ActivityAddArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.imageAddButton.setOnClickListener {
-            when {
-                //이미 권한이 부여되었는지 확인
-                ContextCompat.checkSelfPermission(this,
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                        == PackageManager.PERMISSION_GRANTED -> {
-                    startContentProvider()
-                }
-                //앱에 권한이 필요한 이유 설명
-                shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-                    showPermissionContextPopup()
-                }
-                //권한 요청
-                else -> {
-                    requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                        1000)
-                }
-            }
+        initViews()
+    }
+
+    private fun initViews() = with(binding) {
+        imageAddButton.setOnClickListener {
+            showPictureUploadDialog()
         }
 
-        startActivityForResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == RESULT_OK) {
-                    val getIntent = it?.data
-                    if (getIntent != null) {
-                        selectedUri = getIntent.data
-                        binding.photoImageView.setImageURI(selectedUri)
-                    } else {
-                        Toast.makeText(this, "사진을 가져오지 못했습니다", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(this, "사진을 가져오지 못했습니다", Toast.LENGTH_SHORT).show()
-                }
-            }
 
-        binding.submitButton.setOnClickListener {
-            val title = binding.titleEditText.text.toString()
-            val content = binding.contentEditText.text.toString()
+        submitButton.setOnClickListener {
+            val title = titleEditText.text.toString()
+            val content = contentEditText.text.toString()
             val sellerId = auth.currentUser?.uid.orEmpty()
 
             showProgressBar()
@@ -95,7 +79,9 @@ class AddArticleActivity : AppCompatActivity() {
                     },
                     errorHandler = {
                         hideProgressBar()
-                        Toast.makeText(this, "사진 업로드를 실패했습니다", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddArticleActivity,
+                            "사진 업로드를 실패했습니다",
+                            Toast.LENGTH_SHORT).show()
 
                     })
             } else {
@@ -106,6 +92,8 @@ class AddArticleActivity : AppCompatActivity() {
     }
 
     private fun uploadPhoto(uri: Uri, successHandler: (String) -> Unit, errorHandler: () -> Unit) {
+
+
         val fileName = "${System.currentTimeMillis()}.png"
         storage.reference.child("article/photo").child(fileName).putFile(uri)
             .addOnCompleteListener {
@@ -143,7 +131,7 @@ class AddArticleActivity : AppCompatActivity() {
         when (requestCode) {
             1000 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startContentProvider()
+                    startGalleryScreen()
                 } else {
                     Toast.makeText(this, "권한을 거부하셨습니다", Toast.LENGTH_SHORT).show()
                 }
@@ -151,11 +139,19 @@ class AddArticleActivity : AppCompatActivity() {
         }
     }
 
-    private fun startContentProvider() {
+    private fun startGalleryScreen() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
 
-        startActivityForResultLauncher.launch(intent)
+        startActivityForResult(intent, GALLERY_REQUEST_CODE)
+//        startActivityForResultLauncher.launch(intent)
+    }
+
+    private fun startCameraScreen() {
+        startActivityForResult(
+            CameraActivity.newIntent(this), CAMERA_REQUEST_CODE
+        )
+
     }
 
     private fun showPermissionContextPopup() {
@@ -175,5 +171,78 @@ class AddArticleActivity : AppCompatActivity() {
 
     private fun hideProgressBar() {
         binding.progressBar.visibility = View.GONE
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode != Activity.RESULT_OK) {
+            return
+        }
+
+        when (requestCode) {
+            GALLERY_REQUEST_CODE -> {
+                val uri = data?.data
+                if (uri != null) {
+                    binding.photoImageView.setImageURI(uri)
+                    selectedUri = uri
+                } else {
+                    Toast.makeText(this, "사진을 가져오지 못했습니다", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            CAMERA_REQUEST_CODE -> {
+                data?.let {  intent ->
+                    val uriList = intent.getParcelableArrayListExtra<Uri>(URI_LIST_KEY)
+                    uriList?.let { list ->
+
+                    }
+                }
+
+            }
+
+            else -> Toast.makeText(this@AddArticleActivity, "사진을 가져오지 못했습니다", Toast.LENGTH_SHORT).show()
+
+
+        }
+    }
+
+    private fun checkExternalStoragePermission(uploadAction: () -> Unit) {
+        when {
+            //이미 권한이 부여되었는지 확인
+            ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED -> {
+                uploadAction()
+            }
+            //앱에 권한이 필요한 이유 설명
+            shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE) -> {
+                showPermissionContextPopup()
+            }
+            //권한 요청
+            else -> {
+                requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                    PERMISSION_REQUEST_CODE)
+            }
+        }
+    }
+
+    private fun showPictureUploadDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("사진 첨부")
+            .setMessage("사진 첨부할 방식을 선택하세요")
+            .setPositiveButton("카메라") { _, _ ->
+                checkExternalStoragePermission {
+                    startCameraScreen()
+                }
+            }
+            .setNegativeButton("갤러리") { _, _ ->
+                checkExternalStoragePermission {
+                    startGalleryScreen()
+                }
+            }
+            .create()
+            .show()
+
     }
 }

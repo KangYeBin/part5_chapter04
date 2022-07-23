@@ -1,4 +1,4 @@
-package home
+package com.yb.part5_chapter04.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

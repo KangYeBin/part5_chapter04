@@ -1,4 +1,4 @@
-package mypage
+package com.yb.part5_chapter04.mypage
 
 import android.os.Bundle
 import android.view.View

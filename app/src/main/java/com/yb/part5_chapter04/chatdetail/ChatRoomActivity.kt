@@ -1,4 +1,4 @@
-package chatdetail
+package com.yb.part5_chapter04.chatdetail
 
 import android.os.Bundle
 import android.widget.Button

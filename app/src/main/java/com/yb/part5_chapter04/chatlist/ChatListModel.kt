@@ -1,4 +1,4 @@
-package chatlist
+package com.yb.part5_chapter04.chatlist
 
 data class ChatListModel(
     val buyerId: String?,
