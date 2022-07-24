@@ -52,11 +52,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = fragmentHomeBinding
         articleAdapter = ArticleAdapter(onItemClicked = {
             if (auth.currentUser != null) {
-                if (auth.currentUser?.uid != it.sellerId) {
+                if (auth.currentUser?.uid != it.userId) {
                     //채팅방 띄우기
                     val chatRoom = ChatListModel(
                         buyerId = auth.currentUser?.uid,
-                        sellerId = it.sellerId,
+                        sellerId = it.userId,
                         itemTitle = it.title,
                         key = System.currentTimeMillis()
                     )
@@ -64,7 +64,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     userDB.child(auth.currentUser?.uid.toString()).child(CHILD_CHAT).push()
                         .setValue(chatRoom)
 
-                    userDB.child(it.sellerId).child(CHILD_CHAT).push()
+                    userDB.child(it.userId).child(CHILD_CHAT).push()
                         .setValue(chatRoom)
 
                     Snackbar.make(view, "채팅방이 생성되었습니다\n채팅 탭을 확인해주세요", Snackbar.LENGTH_SHORT).show()
