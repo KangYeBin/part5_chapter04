@@ -21,6 +21,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.yb.part5_chapter04.DBKey.Companion.DB_ARTICLES
 import com.yb.part5_chapter04.databinding.ActivityAddArticleBinding
+import com.yb.part5_chapter04.gallery.GalleryActivity
 import com.yb.part5_chapter04.photo.CameraActivity
 import com.yb.part5_chapter04.photo.PhotoListAdapter
 import kotlinx.coroutines.*
@@ -158,11 +159,8 @@ class AddArticleActivity : AppCompatActivity() {
     }
 
     private fun startGalleryScreen() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
+        startActivityForResult(GalleryActivity.newIntent(this), GALLERY_REQUEST_CODE)
 
-        startActivityForResult(intent, GALLERY_REQUEST_CODE)
-//        startActivityForResultLauncher.launch(intent)
     }
 
     private fun startCameraScreen() {
@@ -200,13 +198,14 @@ class AddArticleActivity : AppCompatActivity() {
 
         when (requestCode) {
             GALLERY_REQUEST_CODE -> {
-                val uri = data?.data
-                if (uri != null) {
-                    imageUriList.add(uri)
-                    photoListAdapter.setPhotoList(imageUriList)
-
-                } else {
-                    Toast.makeText(this, "사진을 가져오지 못했습니다", Toast.LENGTH_SHORT).show()
+                data?.let { intent ->
+                    val uriList = intent.getParcelableArrayListExtra<Uri>(URI_LIST_KEY)
+                    uriList?.let { list ->
+                        imageUriList.addAll(list)
+                        photoListAdapter.setPhotoList(imageUriList)
+                    } ?: kotlin.run {
+                        Toast.makeText(this, "사진을 가져오지 못했습니다", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 
@@ -216,13 +215,13 @@ class AddArticleActivity : AppCompatActivity() {
                     uriList?.let { list ->
                         imageUriList.addAll(list)
                         photoListAdapter.setPhotoList(imageUriList)
-
                     }
+                } ?: kotlin.run {
+                    Toast.makeText(this, "사진을 가져오지 못했습니다", Toast.LENGTH_SHORT).show()
                 }
-
             }
 
-            else -> Toast.makeText(this@AddArticleActivity, "사진을 가져오지 못했습니다", Toast.LENGTH_SHORT)
+            else -> Toast.makeText(this, "사진을 가져오지 못했습니다", Toast.LENGTH_SHORT)
                 .show()
 
 

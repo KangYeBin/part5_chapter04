@@ -18,13 +18,17 @@
         <entry key="..\:/Android/AndroidStudioProjects/part3_chapter06/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25364583333333335" />
         <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/drawable/bg_round_corner_8_black.xml" value="0.2101851851851852" />
         <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/drawable/bottom_round_corner_4_black_24.xml" value="0.14583333333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/drawable/ic_check_disabled.xml" value="0.2101851851851852" />
+        <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/drawable/ic_check_enabled.xml" value="0.2101851851851852" />
         <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/drawable/ic_close_24.xml" value="0.2101851851851852" />
         <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/layout/activity_add_article.xml" value="0.1693840579710145" />
         <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/layout/activity_camera.xml" value="0.1296875" />
+        <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/layout/activity_gallery.xml" value="0.16" />
         <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/layout/activity_image_list.xml" value="0.1296875" />
         <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/layout/fragment_home.xml" value="0.1693840579710145" />
         <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/layout/item_article.xml" value="0.1693840579710145" />
         <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/layout/item_photo_viewholder.xml" value="0.1693840579710145" />
+        <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/layout/viewholder_gallery_photo.xml" value="0.1693840579710145" />
         <entry key="..\:/Android/AndroidStudioProjects/part5_chapter04/app/src/main/res/layout/viewholder_image.xml" value="0.1296875" />
       </map>
     </option>
